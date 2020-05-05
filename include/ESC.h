@@ -6,12 +6,19 @@ class ESC
 {
 private:
     float current = 0;
+    float proposed;
     float* current_;
 public:
 
-    void setCurrentPtr(float*);
+
+    void setProposed(float);
+    float getProposed();
+
+    float getCurrent();
+
     void updateCurrent();
 
+   
   
     ESC(/* args */);
     ~ESC();

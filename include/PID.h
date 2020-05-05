@@ -2,13 +2,19 @@
 #define PID_H
 
 #include "IMU.h"
+#include <Servo.h>
+#include "Gains.h"
+#include "Motors.h"
 
 class PID
 {
 
 public: //constructors
+
+
+    PID(IMU&, Gains&, Motors&, short)
     
-    PID( IMU&, short, float, float, float, float,float, float, float, float, float);
+    PID( IMU&, Servo&, Servo&, Servo&, Servo&, short, float, float, float, float,float, float, float, float, float);
     ~PID();
 
 public: //main methods
@@ -18,7 +24,8 @@ public: //main methods
 private:
 
 
-
+    Gains gains;
+    Motors motors;
     IMU imu;
     short mode;
 
@@ -61,6 +68,11 @@ private:
     float x_output = 0;
     float y_output = 0;
     float z_output = 0;
+
+    int max_x_output;
+    int max_z_output;
+    int max_y_output;
+
 
     float* x_output_ = &x_output;
     float* y_output_ = &y_output;

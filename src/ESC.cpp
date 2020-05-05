@@ -1,9 +1,10 @@
 #include "ESC.h"
 
-void ESC::setCurrentPtr(float* ptr){
-    this->current_ = ptr;
+void ESC::setProposed(float proposed){
+    this->proposed = proposed;
 }
 
-void ESC::updateCurrent(){
-    current = *current_;
-}
+float ESC::getProposed(){
+    return proposed;
+}   
+
