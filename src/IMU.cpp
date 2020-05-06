@@ -8,7 +8,7 @@
 
 volatile bool mpuInterrupt = false; // indicates whether MPU interrupt pin has gone high
 
-bool IMU::updateAngles()
+float* IMU::updateAngles()
 {
     if (!dmpReady)
         return false;
@@ -47,11 +47,11 @@ bool IMU::updateAngles()
     ypr[0] = ypr[0] * 180 / M_PI;
     ypr[1] = ypr[1] * 180 / M_PI;
     ypr[2] = ypr[2] * 180 / M_PI;
-    return true;
+    return ypr;
 }
 
 
-void IMU::updateRates()
+float* IMU::updateRates()
 {
     int16_t gyroX, gyroY, gyroZ;
 
@@ -77,6 +77,8 @@ void IMU::updateRates()
     gyro_rates[0] = gyroZ / 131;
     gyro_rates[1] = gyroY / 131;
     gyro_rates[2] = gyroX / 131;
+
+    return gyro_rates;
 }
 
 void dmpDataReady()
@@ -142,15 +144,6 @@ void IMU::setupGyro(){
     Wire.endTransmission();
 }
 
-float *IMU::getAngles()
-{
-    return ypr;
-}
-
-float *IMU::getRates()
-{
-    return gyro_rates;
-}
 
 IMU::IMU()
 {

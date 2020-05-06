@@ -7,3 +7,6 @@ void MotorController::setMotors(int fl, int fr, int bl, int br){
     back_right.write_esc(br);
 }
 
+int MotorController::throttle = 1050;
+int MotorController::max_out = 1950;
+int MotorController::min_out = 1050;

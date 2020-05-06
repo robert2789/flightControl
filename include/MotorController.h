@@ -17,6 +17,9 @@ public:
     void setMotors(int, int, int, int);
     MotorController();
     ~MotorController();
+    static int throttle;
+    static int max_out;
+    static int min_out;
 };
 
 

@@ -35,11 +35,8 @@ public:
     ~IMU();
 
 public:
-    bool updateAngles();
-    void updateRates();
-
-    float *getAngles();
-    float *getRates();
+    float* updateAngles();
+    float* updateRates();
 
     void setupIMU();
     void setupGyro();
