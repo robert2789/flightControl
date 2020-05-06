@@ -10,7 +10,7 @@ class PID
 {
 
 public: //constructors
-    PID(IMU &, Gains &, MotorController &, short)
+    PID(IMU &, Gains &, MotorController &, short);
     ~PID();
 
 public: //main methods
