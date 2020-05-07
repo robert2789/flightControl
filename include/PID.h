@@ -10,18 +10,19 @@ class PID
 {
 
 public: //constructors
-    PID(IMU &, Gains &, MotorController &, short);
+    PID(IMU&, float*, MotorController&, short);
     ~PID();
 
 public: //main methods
     void run_loop();
+    void updateSetpoints(float*);
 
 private: //helper methods
     void mapToRange(int &);
     void PIDCalc(PIDValues&);
 
 private:
-    Gains gains;
+    
     MotorController motors;
     IMU imu;
     short mode;
@@ -49,7 +50,6 @@ private:
     unsigned long time_current = 0;
     unsigned long time_prev = 0;
     unsigned long time_elapsed = 0;
-    bool first_time = true;
 };
 
 #endif //PID_H

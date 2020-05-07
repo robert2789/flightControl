@@ -1,6 +1,7 @@
 #include "PID.h"
 #include "IMU.h"
 #include "MACROS.h"
+#include "MotorController.h"
 
 void PID::run_loop()
 {
@@ -113,25 +114,30 @@ void PID::mapToRange(int &out)
     }
 }
 
+void PID::updateSetpoints(float* val){
+    x.setpoint = *(val + 0);
+    y.setpoint = *(val + 1);
+    z.setpoint = *(val + 2);
+}
 
-
-PID::PID(IMU &imu, Gains &gains, MotorController &motorController, short mode)
+PID::PID(IMU& imu, float* gains, MotorController& motorController, short mode)
 {
+
+    this->x.p_gain = *(gains + 0);
+    this->x.d_gain = *(gains + 1);
+    this->x.i_gain = *(gains + 2); 
+
+    this->y.p_gain = *(gains + 3);
+    this->y.d_gain = *(gains + 4);
+    this->y.i_gain = *(gains + 5);
+
+    this->z.p_gain = *(gains + 6);
+    this->z.d_gain = *(gains + 7);
+    this->z.i_gain = *(gains + 8);
+
+
     this->imu = imu;
-    this->gains = gains;
     this->motors = motorController;
     this->mode = mode;
 
-    if (mode == ANGLE_MODE)
-    {
-        max_x_output = MAX_ROLL_DELTA;
-        max_y_output = MAX_PITCH_DELTA;
-        max_z_output = MAX_YAW_DELTA;
-    }
-    else if (mode == RATE_MODE)
-    {
-        max_x_output = MAX_X_RATE_DELTA;
-        max_y_output = MAX_Y_RATE_DELTA;
-        max_z_output = MAX_Z_RATE_DELTA;
-    }
 }
